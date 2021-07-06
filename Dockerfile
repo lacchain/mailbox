@@ -3,5 +3,5 @@ WORKDIR /app
 COPY ./package*.json ./
 RUN npm ci
 RUN mkdir src
-COPY ./src/** ./src
+COPY ./src/** ./src/
 CMD ["npm", "start"]
