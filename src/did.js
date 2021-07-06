@@ -14,6 +14,10 @@ generateKeyPair().then( async keyPair => {
 		publicKey: `0x${keyPair.publicKey}`,
 		controller: did.id,
 	} );
+	await did.addService( {
+		type: 'DIDComm',
+		endpoint: 'https://mailbox.lacchain.net'
+	} );
 	console.log( 'DID: ', did.id );
 	console.log( 'DID Private Key: ', did.config.controllerPrivateKey );
 	console.log( 'Encryption Public Key: ', keyPair.publicKey );

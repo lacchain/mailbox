@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --experimental-json-modules src/app.js",
+    "test": "DID=did:lac:main:0x4222ec932c5a68b80e71f4ddebb069fa02518b8a ./node_modules/mocha/bin/mocha --experimental-json-modules --timeout 30000 --ui bdd ./test/unit/**"
   },
   "keywords": [],
   "author": "",

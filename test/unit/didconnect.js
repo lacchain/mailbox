@@ -36,7 +36,7 @@ describe( 'DIDConnect', () => {
 		try {
 			await didconnect.authenticate( token );
 		} catch( e ) {
-			expect( e.message ).to.equals( 'The sub field must be equal to iss' );
+			expect( e.message ).to.equals( 'The iss field must be equal to sub' );
 		}
 	} );
 
