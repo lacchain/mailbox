@@ -23,15 +23,15 @@ if( !process.env.SSL ) {
 	const server = http.createServer( app );
 
 	server.listen( process.env.MEDIATOR_PORT, function() {
-		console.log( 'LACChain ID | API Server v2.0 HTTP port', process.env.API_PORT );
+		console.log( 'LACChain ID | API Server v2.0 HTTP port', process.env.MEDIATOR_PORT );
 	} );
 } else {
-	const privateKey = fs.readFileSync( 'mailbox.key', 'utf8' );
-	const certificate = fs.readFileSync( 'mailbox.crt', 'utf8' );
+	const privateKey = fs.readFileSync( process.env.CERT_KEY, 'utf8' );
+	const certificate = fs.readFileSync( process.env.CERT_CRT, 'utf8' );
 	const credentials = { key: privateKey, cert: certificate };
 	const ssl = https.createServer( credentials, app );
 
 	ssl.listen( process.env.MEDIATOR_PORT, '0.0.0.0', function() {
-		console.log( 'LACChain ID | API Server v1.0 HTTPS port', process.env.API_PORT );
+		console.log( 'LACChain ID | API Server v1.0 HTTPS port', process.env.MEDIATOR_PORT );
 	} );
 }

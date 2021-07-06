@@ -66,7 +66,7 @@ When an instance of Mailbox is deployed, it is necessary to specify a DID associ
 
 The official mailbox from lacchain has the following DID: 
 
-**MAILBOX_DID:** ``0x5c3968542ca976bec977270d3fe980dd4742865e``
+**MAILBOX_DID:** ```did:lac:main:0x5c3968542ca976bec977270d3fe980dd4742865e```
 
 And, it can be resolved in the following DID Registry: ``0xCC77A5e709cB473F49c943D9b40B989f986E5F2F``
 
