@@ -4,4 +4,5 @@ COPY ./package*.json ./
 RUN npm ci
 RUN mkdir src
 COPY ./src ./src/
-CMD ["npm", "start"]
+ENTRYPOINT ["tail"]
+CMD ["-f","/dev/null"]
