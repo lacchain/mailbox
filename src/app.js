@@ -18,7 +18,7 @@ app.use( function( req, res, next ) {
 } );
 
 app.use( '/', mediatorRouter.getRouter() );
-
+console.log(process.env);
 if( !process.env.SSL ) {
 	const server = http.createServer( app );
 
