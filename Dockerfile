@@ -1,8 +1,7 @@
 FROM node:14.4
 WORKDIR /app
 COPY ./package*.json ./
-RUN npm ci
+RUN yarn install
 RUN mkdir src
 COPY ./src ./src/
-ENTRYPOINT ["tail"]
-CMD ["-f","/dev/null"]
+CMD ["npm", "start"]
