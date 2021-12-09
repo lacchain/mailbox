@@ -13,7 +13,8 @@ export default class MediatorRouter extends Router {
 			return credentials.map( vc => JSON.parse( vc ) );
 		} );
 
-		this.post( '/vc', 'AUTHENTICATED', async req => {
+		this.post( '/vc', 'AUTHENTICATED', async (req, res) => {
+			res.setHeader('Access-Control-Allow-Origin','*');
 			const { body } = req;
 			const id = v4();
 			const message = await didCommService.decrypt( body, config.did.encryptionKeyPair );

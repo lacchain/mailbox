@@ -65,7 +65,7 @@ describe( 'Mediator', () => {
 			"type": "https://didcomm.org/routing/2.0/forward",
 			"to": [config.did.id],
 			"expires_time": 1516385931,
-			"body":{
+			"body": {
 				"next": bob.did,
 				"payloads~attach": [
 					encryptedToBob
