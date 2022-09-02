@@ -15,7 +15,7 @@
     "@lacchain/did": "^1.2.2",
     "DIDComm-js": "git+https://github.com/decentralized-identity/DIDComm-js.git",
     "axios": "^0.21.1",
-    "did-jwt": "^5.5.0",
+    "did-jwt": "5.5.0",
     "express": "^4.17.1",
     "json-web-token": "^3.2.0",
     "libsodium-wrappers": "^0.7.9",
