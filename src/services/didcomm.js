@@ -22,7 +22,11 @@ export default class DIDCommService {
 
 	async decrypt( message, recipientKeyPair ) {
 		await this.didcomm.ready;
-		return await this.didcomm.unpackMessage( message, getKeyPairFromHex( recipientKeyPair ) );
+		console.log( { message, recipientKeyPair } );
+		return await this.didcomm.unpackMessage( message, getKeyPairFromHex( recipientKeyPair ) ).catch( error => {
+			console.log( error );
+			return null;
+		} );
 	}
 
 }
