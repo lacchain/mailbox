@@ -15,6 +15,7 @@ export default class RedisService {
 		this.hdel = promisify( redisClient.hdel ).bind( redisClient );
 		this.get = promisify( redisClient.get ).bind( redisClient );
 		this.hvals = promisify( redisClient.hvals ).bind( redisClient );
+		this.hkeys = promisify( redisClient.hkeys ).bind( redisClient );
 		this.del = promisify( redisClient.del ).bind( redisClient );
 	}
 

@@ -9,8 +9,9 @@ export default class MediatorRouter extends Router {
 
 		this.get( '/vc', 'AUTHENTICATED', async req => {
 			const { did } = req;
+			const ids = await vcService.hkeys( did );
 			const credentials = await vcService.hvals( did );
-			return credentials.map( vc => JSON.parse( vc ) );
+			return credentials.map( (vc, index) => ({ ['@mid']: ids[index], ...JSON.parse( vc ) }) );
 		} );
 
 		this.post( '/vc', 'AUTHENTICATED', async (req, res) => {
