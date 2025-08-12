@@ -5,6 +5,10 @@ import cors from 'cors';
 import MediatorRouter from "./routes/mediator.js";
 import fs from "fs";
 
+import { config } from "dotenv";
+config({ path: process.ENV })
+
+
 const app = express();
 const mediatorRouter = new MediatorRouter();
 

@@ -1,4 +1,8 @@
+import { config } from "dotenv";
+config({ path: process.ENV })
+
 export default {
+	
 	resolver: process.env.DID_RESOLVER_URL || 'https://resolver.lacchain.net/',
 	did: {
 		id: process.env.DID,

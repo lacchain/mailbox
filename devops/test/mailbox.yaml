@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailbox
+  namespace: mailbox-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mailbox
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mailbox
+    spec:
+      containers:
+      - env:
+        - name: DID_RESOLVER_URL
+          value: "https://resolver-dev.lacchain.net/"
+        - name: MEDIATOR_PORT
+          value: "8080"
+        - name: SSL
+          value: "true"
+        - name: CERT_KEY
+          value: /certs/mailbox.key
+        - name: CERT_CRT
+          value: /certs/mailbox.crt
+        - name: REDIS_HOST
+          value: redis
+        - name: DID
+          value: did:lac:develop:0x450c8e73177f76b0c7a42a306931a8eaf73d912b
+        - name: ENCRYPTION_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: publicKey
+              name: encryption
+        - name: ENCRYPTION_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: privateKey
+              name: encryption
+        image: ghcr.io/lacchain/mailbox:latest
+        imagePullPolicy: Always
+        name: mailbox
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 400m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /certs
+          name: certificates
+          readOnly: true
+      volumes:
+      - name: certificates
+        secret:
+          defaultMode: 420
+          items:
+          - key: tls.crt
+            path: mailbox.crt
+          - key: tls.key
+            path: mailbox.key
+          secretName: mailbox-ssl-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailbox
+  namespace: mailbox-dev
+spec:
+  ports:
+  - name: http
+    port: 443
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: mailbox
+  type: LoadBalancer
+  loadBalancerIP: 35.194.45.203
